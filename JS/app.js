@@ -18,7 +18,7 @@ $(document).ready(function () {
     //Sets default imnportance indicator to 'normal'
     $(impString).insertAfter('.dropdown-menu');
 
-//remove button functionality
+    //remove button functionality
     $('#list').on('click', 'button', function (e){
         e.target.parentElement.parentElement.parentElement.remove();
     });
@@ -29,7 +29,7 @@ $(document).ready(function () {
         let item = e.target.textContent;
         $('#inputSection #toggleImp').remove();
 
-    //Set impValue to 'High', 'Medium', or 'Low'
+    //Set impValue from 'Normal' to: 'High' or 'Low'
         impValue = item;
 
         if (item === 'High') {
@@ -58,13 +58,6 @@ $(document).ready(function () {
 
 });
 
-
-//
-//function removeFunc() {
-//    console.log('inside remove function');
-//
-//    //for (i = 0; i < db.length; i++) {}
-//}
 
 
 function createTodo() {
@@ -95,6 +88,7 @@ function createTodo() {
     $('#inputSection #toggleImp').remove();
     $('#addTodo').val('');
     
+    // Reset Importance to 'Normal'
     impString = `<div id='toggleImp' class="alert alert-primary my-0 py-1 px-2" role="alert">Normal</div>`;
     $(impString).insertAfter('.dropdown-menu');
     
