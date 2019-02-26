@@ -2,8 +2,8 @@
 //Store todos here
 let db = [];
 let listLength = 0;
-let impString = '';
-let impValue = '';
+let impString = `<div id='toggleImp' class="alert alert-primary my-0 py-1 px-2" role="alert">Normal</div>`;
+let impValue = 'Normal';
 
 function Todo(text, location, importanceHTML, importanceString) {
     this.text = text;
@@ -14,13 +14,15 @@ function Todo(text, location, importanceHTML, importanceString) {
 
 $(document).ready(function () {
     $('#button').click(createTodo);
+    
+    //Sets default imnportance indicator to 'normal'
+    $(impString).insertAfter('.dropdown-menu');
 
-
-
-    //remove button functionality
-    $('#removeButton').click(function (e){
-        console.log('This does not work!!');
+//remove button functionality
+    $('#list').on('click', 'button', function (e){
+        e.target.parentElement.parentElement.parentElement.remove();
     });
+
 
     //Build list items from user inputs
     $('.dropdown-menu').click(function (e) {
@@ -35,10 +37,6 @@ $(document).ready(function () {
             $(item).insertAfter('.dropdown-menu');
         }
 
-        if (item === 'Normal') {
-            item = `<div id='toggleImp' class="alert alert-primary my-0 py-1 px-2" role="alert">Normal</div>`
-            $(item).insertAfter('.dropdown-menu');
-        }
 
         if (item === 'Low') {
             item = `<div id='toggleImp' class="alert alert-secondary my-0 py-1 px-2" role="alert">Low</div>`
@@ -73,7 +71,7 @@ function createTodo() {
     //Get Text
     //Create LI
     var text = $('#addTodo').val();
-    var imp = $('.dropdown-menu').text();
+    //var imp = $('.dropdown-menu').text();
     let objTodo = new Todo(text, listLength, impString, impValue);
     db.push(objTodo);
     console.log(text, listLength, impString);
@@ -96,5 +94,8 @@ function createTodo() {
     $('#list').append(li);
     $('#inputSection #toggleImp').remove();
     $('#addTodo').val('');
-
+    
+    impString = `<div id='toggleImp' class="alert alert-primary my-0 py-1 px-2" role="alert">Normal</div>`;
+    $(impString).insertAfter('.dropdown-menu');
+    
 }
